@@ -17,8 +17,8 @@ public static class DependencyResolver
         service.AddDbContext<DataContext>(options =>
             options.UseNpgsql(connectionString));
 
-        service.AddSingleton<IAuthBusinessLogic, AuthBusinessLogic>();
-        service.AddSingleton<IAuthRepository, AuthRepository>();
+        service.AddScoped<IAuthBusinessLogic, AuthBusinessLogic>();
+        service.AddScoped<IAuthRepository, AuthRepository>();
 
         return service.BuildServiceProvider();
     }

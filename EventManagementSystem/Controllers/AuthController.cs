@@ -1,5 +1,5 @@
 ﻿using BusinessLogic.Contracts;
-using DataAccess.Entities;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EventManagementSystem.Controllers;

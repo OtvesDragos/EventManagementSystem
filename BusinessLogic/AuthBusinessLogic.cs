@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.Contracts;
 using Domain.Entities;
 using Repository.Contracts;
+using Services;
 
 namespace BusinessLogic;
 public class AuthBusinessLogic : IAuthBusinessLogic
@@ -12,8 +13,8 @@ public class AuthBusinessLogic : IAuthBusinessLogic
         this.authRepository = authRepository;
     }
 
-    public Task Authenticate(User user)
+    public async Task Authenticate(User user)
     {
-        throw new NotImplementedException();
+        await authRepository.AddUser(user);
     }
 }

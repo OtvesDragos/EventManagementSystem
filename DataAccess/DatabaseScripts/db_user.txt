@@ -1,6 +1,5 @@
 GRANT CONNECT ON DATABASE event_management TO event_user;
 
-\c event_management
 
 GRANT USAGE ON SCHEMA public TO event_user;
 
