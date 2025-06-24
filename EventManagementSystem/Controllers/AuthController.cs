@@ -20,4 +20,10 @@ public class AuthController : ControllerBase
     {
         await authBusinessLogic.Authenticate(user);
     }
+
+    [HttpPost("Login")]
+    public async Task<string> Login([FromBody] Credentials credentials)
+    {
+        return await authBusinessLogic.Login(credentials);
+    }
 }

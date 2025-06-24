@@ -10,7 +10,7 @@ public class User
     [Column("id")]
     public Guid Id { get; set; }
     [Column("email")]
-    public string Email { get; set; }
+    public string EmailHash { get; set; }
     [Column("password_hash")]
     public string PasswordHash { get; set; }
 
