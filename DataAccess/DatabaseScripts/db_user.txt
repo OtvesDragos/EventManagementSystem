@@ -1,0 +1,10 @@
+GRANT CONNECT ON DATABASE event_management TO event_user;
+
+\c event_management
+
+GRANT USAGE ON SCHEMA public TO event_user;
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO event_user;
+
+ALTER DEFAULT PRIVILEGES IN SCHEMA public
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO event_user;
