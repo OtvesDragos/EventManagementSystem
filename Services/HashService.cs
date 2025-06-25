@@ -1,21 +1,22 @@
 ﻿using Isopoh.Cryptography.Argon2;
+using Services.Contracts;
 using System.Security.Cryptography;
 using System.Text;
 
 namespace Services;
-public static class HashService
+public class HashService : IHashService
 {
-    public static string GetPasswordHash(string password)
+    public string GetPasswordHash(string password)
     {
         return Argon2.Hash(password);
     }
 
-    public static bool VerifyPassword(string password, string passwordHash)
+    public bool VerifyPassword(string password, string passwordHash)
     {
         return Argon2.Verify(passwordHash, password);
     }
 
-    public static string GetSha256Hash(string input)
+    public string GetSha256Hash(string input)
     {
         using (SHA256 sha256 = SHA256.Create())
         {
@@ -30,7 +31,7 @@ public static class HashService
         }
     }
 
-    public static bool VerifySha256Hash(string input, string hash)
+    public bool VerifySha256Hash(string input, string hash)
     {
         var actualHash = GetSha256Hash(input);
 

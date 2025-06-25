@@ -1,9 +1,21 @@
-GRANT CONNECT ON DATABASE event_management TO event_user;
+CREATE TABLE IF NOT EXISTS public.users
+(
+    id uuid NOT NULL,
+    email character varying(64) COLLATE pg_catalog."default" NOT NULL,
+    password_hash character varying(512) COLLATE pg_catalog."default" NOT NULL,
+    first_name character varying(100) COLLATE pg_catalog."default",
+    last_name character varying(100) COLLATE pg_catalog."default",
+    CONSTRAINT users_pkey PRIMARY KEY (id),
+    CONSTRAINT users_email_key UNIQUE (email)
+)
 
+TABLESPACE pg_default;
 
-GRANT USAGE ON SCHEMA public TO event_user;
+ALTER TABLE IF EXISTS public.users
+    OWNER to postgres;
 
-GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO event_user;
+REVOKE ALL ON TABLE public.users FROM event_user;
 
-ALTER DEFAULT PRIVILEGES IN SCHEMA public
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO event_user;
+GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE public.users TO event_user;
+
+GRANT ALL ON TABLE public.users TO postgres;

@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Repository;
 using Repository.Contracts;
+using Repository.Contracts.Mappers;
+using Repository.Mappers;
 using Services;
 using Services.Contracts;
 
@@ -22,6 +24,8 @@ public static class DependencyResolver
         service.AddScoped<IAuthBusinessLogic, AuthBusinessLogic>();
         service.AddScoped<IAuthRepository, AuthRepository>();
         service.AddScoped<IJwtTokenService, JwtTokenService>();
+        service.AddScoped<IUserMapper, UserMapper>();
+        service.AddScoped<IHashService, HashService>();
 
         return service.BuildServiceProvider();
     }

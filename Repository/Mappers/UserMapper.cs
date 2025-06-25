@@ -1,10 +1,18 @@
 ﻿using DataAccess.Entities;
-using Services;
+using Repository.Contracts.Mappers;
+using Services.Contracts;
 
 namespace Repository.Mappers;
-public static class UserMapper
+public class UserMapper : IUserMapper
 {
-    public static User GetDataAccess(Domain.Entities.User user)
+    private readonly IHashService hashService;
+
+    public UserMapper(IHashService hashService)
+    {
+        this.hashService = hashService;
+    }
+
+    public User GetDataAccess(Domain.Entities.User user)
     {
         if (user == null) throw new ArgumentNullException(nameof(user));
 
@@ -12,12 +20,12 @@ public static class UserMapper
         {
             FirstName = user.FirstName,
             LastName = user.LastName,
-            PasswordHash = HashService.GetPasswordHash(user.Password),
-            EmailHash = HashService.GetSha256Hash(user.Email)
+            PasswordHash = hashService.GetPasswordHash(user.Password),
+            EmailHash = hashService.GetSha256Hash(user.Email)
         };
     }
 
-    public static Domain.Entities.User GetDomain(User user)
+    public Domain.Entities.User GetDomain(User user)
     {
         if (user == null) throw new ArgumentNullException(nameof(user));
 

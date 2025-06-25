@@ -4,5 +4,5 @@ namespace Repository.Contracts;
 public interface IAuthRepository
 {
     Task AddUser(User user);
-    Task<User> GetUserByEmail(Credentials credentials);
+    Task<User> GetUserByEmail(string email);
 }

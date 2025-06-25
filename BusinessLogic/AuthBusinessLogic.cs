@@ -9,11 +9,13 @@ public class AuthBusinessLogic : IAuthBusinessLogic
 {
     private readonly IAuthRepository authRepository;
     private readonly IJwtTokenService jwtTokenService;
+    private readonly IHashService hashService;
 
-    public AuthBusinessLogic(IAuthRepository authRepository, IJwtTokenService jwtTokenService)
+    public AuthBusinessLogic(IAuthRepository authRepository, IJwtTokenService jwtTokenService, IHashService hashService)
     {
         this.authRepository = authRepository;
         this.jwtTokenService = jwtTokenService;
+        this.hashService = hashService;
     }
 
     public async Task Authenticate(User user)
@@ -33,9 +35,9 @@ public class AuthBusinessLogic : IAuthBusinessLogic
             throw new ArgumentNullException(nameof(credentials));
         }
 
-        var user = await authRepository.GetUserByEmail(credentials);
+        var user = await authRepository.GetUserByEmail(hashService.GetSha256Hash(credentials.Email));
 
-        if (!HashService.VerifyPassword(credentials.Password, user.Password))
+        if (!hashService.VerifyPassword(credentials.Password, user.Password))
         {
             throw new InvalidOperationException("The password is incorrect!");
         }

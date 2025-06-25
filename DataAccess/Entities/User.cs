@@ -14,9 +14,9 @@ public class User
     [Column("password_hash")]
     public string PasswordHash { get; set; }
 
-    [Column("last_name")]
+    [Column("first_name")]
     public string FirstName { get; set; }
 
-    [Column("first_name")]
+    [Column("last_name")]
     public string LastName { get; set; }
 }
