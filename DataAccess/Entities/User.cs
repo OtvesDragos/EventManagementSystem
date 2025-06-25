@@ -19,4 +19,6 @@ public class User
 
     [Column("last_name")]
     public string LastName { get; set; }
+
+    public IList<Event> Events { get; set; }
 }

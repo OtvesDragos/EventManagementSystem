@@ -8,5 +8,5 @@ public class Event
     public DateTime Timestamp { get; set; }
     public string Location { get; set; }
     public int? Code { get; set; }
-    public string CreatedBy { get; set; }
+    public Guid CreatedBy { get; set; }
 }

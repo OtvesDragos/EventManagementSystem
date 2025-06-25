@@ -41,7 +41,7 @@ public static class DomainEntities
         {
             Name = Constants.Name1,
             Description = Constants.Description1,
-            CreatedBy = Constants.CreatedBy1,
+            CreatedBy = Constants.UserId1,
             Location = Constants.Location1,
             Timestamp = Constants.Timestamp1
         };
@@ -53,7 +53,7 @@ public static class DomainEntities
         {
             Name = Constants.Name1,
             Description = Constants.Description1,
-            CreatedBy = Constants.CreatedBy1,
+            CreatedBy = Constants.UserId1,
             Location = Constants.Location1,
             Timestamp = Constants.Timestamp1
         };

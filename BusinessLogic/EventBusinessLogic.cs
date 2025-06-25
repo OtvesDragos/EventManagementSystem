@@ -22,23 +22,28 @@ public class EventBusinessLogic : IEventBusinessLogic
         await eventRepository.Create(@event);
     }
 
-    public Task Delete(int code)
+    public Task Delete(int code, Guid ownerId)
     {
-        throw new NotImplementedException();
+        return eventRepository.Delete(code, ownerId);
     }
 
-    public async Task Edit(Event @event)
+    public async Task Edit(Event @event, Guid ownerId)
     {
         if (@event == null)
         {
             throw new ArgumentNullException(nameof(@event));
         }
 
-        await eventRepository.Edit(@event);
+        await eventRepository.Edit(@event, ownerId);
     }
 
-    public Task<IList<Event>> GetAllByOwner(string ownerEmail)
+    public async Task<IList<Event>> GetAllByOwner(Guid ownerId)
     {
-        throw new NotImplementedException();
+        if (ownerId == default)
+        {
+            throw new ArgumentException(nameof(ownerId));
+        }
+        
+        return await eventRepository.GetAllByOwner(ownerId);
     }
 }

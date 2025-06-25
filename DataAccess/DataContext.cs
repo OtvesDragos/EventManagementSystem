@@ -21,8 +21,14 @@ public class DataContext : DbContext
             entity.Property(e => e.PasswordHash).IsRequired();
         });
 
-        modelBuilder.Entity<Event>(entity => { 
+        modelBuilder.Entity<Event>(entity =>
+        {
             entity.HasKey(e => e.Id);
+            entity.Property(e => e.Code)
+            .ValueGeneratedOnAdd();
+            entity.HasOne(e => e.Owner)
+            .WithMany(u => u.Events)
+            .HasForeignKey(e => e.CreatedBy);
         });
     }
 }

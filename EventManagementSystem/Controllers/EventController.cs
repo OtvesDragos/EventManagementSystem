@@ -25,23 +25,46 @@ public class EventController : ControllerBase
 
     [Authorize]
     [HttpPut("Edit")]
-    public async Task Edit([FromBody] Event eventToEdit)
+    public async Task<IActionResult> Edit([FromBody] Event eventToEdit)
     {
-        await eventBusinessLogic.Edit(eventToEdit);
+        var userId = User?.FindFirst("id")?.Value;
+
+        if (userId == null)
+        {
+            return Unauthorized("User Id not found!");
+        }
+
+        await eventBusinessLogic.Edit(eventToEdit, Guid.Parse(userId));
+        return Ok();
     }
 
     [Authorize]
     [HttpDelete("Delete")]
-    public async Task Delete([FromBody] int ownerEmail)
+    public async Task<IActionResult> Delete([FromBody] int ownerEmail)
     {
-        await eventBusinessLogic.Delete(ownerEmail);
+        var userId = User?.FindFirst("id")?.Value;
+
+        if (userId == null)
+        {
+            return Unauthorized("User Id not found!");
+        }
+
+        await eventBusinessLogic.Delete(ownerEmail, Guid.Parse(userId));
+        return Ok();
     }
 
     [Authorize]
     [HttpPost("GetAllByOwner")]
-    public async Task<IList<Event>> GetAllByOwner(string ownerEmail)
+    public async Task<IActionResult> GetAllByOwner()
     {
-        return await eventBusinessLogic.GetAllByOwner(ownerEmail);
+        var userId = User?.FindFirst("id")?.Value;
+
+        if (userId == null)
+        {
+            return Unauthorized("User Id not found!");
+        }
+
+        return Ok(await eventBusinessLogic.GetAllByOwner(Guid.Parse(userId)));
     }
 
 }

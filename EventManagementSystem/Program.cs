@@ -1,4 +1,6 @@
 using DI;
+using EventManagementSystem.Filter;
+using EventManagementSystem.Middleware;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -23,6 +25,7 @@ builder.Services.AddSwaggerGen(options =>
         Type = SecuritySchemeType.ApiKey
     });
     options.OperationFilter<SecurityRequirementsOperationFilter>();
+
 });
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -54,5 +57,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseMiddleware<ExceptionSanitizingMiddleware>();
 
 app.Run();
