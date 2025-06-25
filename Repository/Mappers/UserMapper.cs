@@ -3,7 +3,7 @@ using Repository.Contracts.Mappers;
 using Services.Contracts;
 
 namespace Repository.Mappers;
-public class UserMapper : IUserMapper
+public class UserMapper : IMapper<Domain.Entities.User, User>
 {
     private readonly IHashService hashService;
 

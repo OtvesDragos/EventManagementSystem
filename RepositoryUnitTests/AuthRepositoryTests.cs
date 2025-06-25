@@ -1,5 +1,6 @@
 ﻿using Common;
 using DataAccess;
+using DataAccess.Entities;
 using KellermanSoftware.CompareNetObjects;
 using Microsoft.EntityFrameworkCore;
 using NSubstitute;
@@ -12,7 +13,7 @@ namespace RepositoryUnitTests;
 public sealed class AuthRepositoryTests
 {
     private readonly CompareLogic compareLogic = new CompareLogic();
-    private IUserMapper userMapperMock;
+    private IMapper<Domain.Entities.User, User> userMapperMock;
     private DataContext dataContextMock;
 
     private IAuthRepository testee;
@@ -25,7 +26,7 @@ public sealed class AuthRepositoryTests
             .Options;
 
         dataContextMock = new DataContext(options);
-        userMapperMock = Substitute.For<IUserMapper>();
+        userMapperMock = Substitute.For<IMapper<Domain.Entities.User, User>>();
 
         testee = new AuthRepository(dataContextMock, userMapperMock);
     }

@@ -1,6 +1,7 @@
 ﻿using BusinessLogic;
 using BusinessLogic.Contracts;
 using DataAccess;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,11 +22,17 @@ public static class DependencyResolver
         service.AddDbContext<DataContext>(options =>
             options.UseNpgsql(connectionString));
 
-        service.AddScoped<IAuthBusinessLogic, AuthBusinessLogic>();
-        service.AddScoped<IAuthRepository, AuthRepository>();
         service.AddScoped<IJwtTokenService, JwtTokenService>();
-        service.AddScoped<IUserMapper, UserMapper>();
         service.AddScoped<IHashService, HashService>();
+
+        service.AddScoped<IAuthBusinessLogic, AuthBusinessLogic>();
+        service.AddScoped<IEventBusinessLogic, EventBusinessLogic>();
+
+        service.AddScoped<IAuthRepository, AuthRepository>();
+        service.AddScoped<IEventRepository, EventRepository>();
+
+        service.AddScoped<IMapper<User, DataAccess.Entities.User>, UserMapper>();
+        service.AddScoped<IMapper<Event, DataAccess.Entities.Event>, EventMapper>();
 
         return service.BuildServiceProvider();
     }

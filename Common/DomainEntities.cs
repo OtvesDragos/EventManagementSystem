@@ -34,4 +34,37 @@ public static class DomainEntities
             Password = Constants.Password1
         };
     }
+
+    public static Event Event1()
+    {
+        return new Event
+        {
+            Name = Constants.Name1,
+            Description = Constants.Description1,
+            CreatedBy = Constants.CreatedBy1,
+            Location = Constants.Location1,
+            Timestamp = Constants.Timestamp1
+        };
+    }
+
+    public static Event Event2()
+    {
+        return new Event
+        {
+            Name = Constants.Name1,
+            Description = Constants.Description1,
+            CreatedBy = Constants.CreatedBy1,
+            Location = Constants.Location1,
+            Timestamp = Constants.Timestamp1
+        };
+    }
+
+    public static IList<Event> Events()
+    {
+        return new List<Event>
+        {
+            Event1(),
+            Event2()
+        };
+    }
 }

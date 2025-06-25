@@ -7,10 +7,10 @@ using Repository.Contracts.Mappers;
 namespace Repository;
 public class AuthRepository : IAuthRepository
 {
-    private readonly IUserMapper userMapper;
+    private readonly IMapper<User, DataAccess.Entities.User> userMapper;
     private readonly DataContext dataContext;
 
-    public AuthRepository(DataContext dataContext, IUserMapper userMapper)
+    public AuthRepository(DataContext dataContext, IMapper<User, DataAccess.Entities.User> userMapper)
     {
         this.dataContext = dataContext;
         this.userMapper = userMapper;
