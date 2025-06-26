@@ -24,5 +24,11 @@ public class Event
 
     [Column("created_by")]
     public Guid CreatedBy { get; set; }
+
+    [Column("visibility")]
+    public string? Visibility { get; set; }
     public User Owner { get; set; }
+    public IList<EventResponse> Responses { get; internal set; }
+    public IList<UserEvent> UserEvents { get; set; }
+
 }

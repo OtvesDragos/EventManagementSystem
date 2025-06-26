@@ -7,4 +7,6 @@ public interface IEventBusinessLogic
     Task Edit (Event @event, Guid ownerId);
     Task Delete (int code, Guid ownerId);
     Task<IList<Event>> GetAllByOwner(Guid ownerId);
+    Task<IList<Event>> GetAllPublic();
+    Task<Event> GetByCode(int eventCode);
 }

@@ -37,4 +37,12 @@ public class HashService : IHashService
 
         return string.Equals(actualHash, hash, StringComparison.InvariantCultureIgnoreCase);
     }
+
+    public static bool AreHashesEqual(string hash1, string hash2)
+    {
+        var bytes1 = Encoding.UTF8.GetBytes(hash1);
+        var bytes2 = Encoding.UTF8.GetBytes(hash2);
+
+        return CryptographicOperations.FixedTimeEquals(bytes1, bytes2);
+    }
 }

@@ -46,4 +46,14 @@ public class EventBusinessLogic : IEventBusinessLogic
         
         return await eventRepository.GetAllByOwner(ownerId);
     }
+
+    public async Task<IList<Event>> GetAllPublic()
+    {
+        return await eventRepository.GetAllPublic();
+    }
+
+    public async Task<Event> GetByCode(int eventCode)
+    {
+        return await eventRepository.GetByCode(eventCode);
+    }
 }

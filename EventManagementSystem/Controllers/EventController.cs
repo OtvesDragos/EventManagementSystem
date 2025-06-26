@@ -67,4 +67,16 @@ public class EventController : ControllerBase
         return Ok(await eventBusinessLogic.GetAllByOwner(Guid.Parse(userId)));
     }
 
+    [HttpGet("GetAllPublic")]
+    public async Task<IList<Event>> GetAllPublic()
+    {
+        return await eventBusinessLogic.GetAllPublic();
+    }
+
+    [Authorize]
+    [HttpGet("GetByCode")]
+    public async Task<Event> GetByCode([FromQuery] int eventCode)
+    {
+        return await eventBusinessLogic.GetByCode(eventCode);
+    }
 }

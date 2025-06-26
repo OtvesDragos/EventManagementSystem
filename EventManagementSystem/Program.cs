@@ -1,5 +1,4 @@
 using DI;
-using EventManagementSystem.Filter;
 using EventManagementSystem.Middleware;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -56,8 +55,8 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.MapControllers();
-
 app.UseMiddleware<ExceptionSanitizingMiddleware>();
+
+app.MapControllers();
 
 app.Run();

@@ -18,10 +18,10 @@ public class UserMapper : IMapper<Domain.Entities.User, User>
 
         return new User
         {
-            FirstName = user.FirstName,
-            LastName = user.LastName,
-            PasswordHash = hashService.GetPasswordHash(user.Password),
-            EmailHash = hashService.GetSha256Hash(user.Email)
+            FirstName = user.FirstName.Trim(),
+            LastName = user.LastName.Trim(),
+            PasswordHash = hashService.GetPasswordHash(user.Password.Trim()),
+            EmailHash = hashService.GetSha256Hash(user.Email.Trim())
         };
     }
 

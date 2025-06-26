@@ -27,12 +27,17 @@ public static class DependencyResolver
 
         service.AddScoped<IAuthBusinessLogic, AuthBusinessLogic>();
         service.AddScoped<IEventBusinessLogic, EventBusinessLogic>();
+        service.AddScoped<IEventResponseBusinessLogic, EventResponseBusinessLogic>();
+        service.AddScoped<IUserEventBusinessLogic, UserEventBusinessLogic>();
 
         service.AddScoped<IAuthRepository, AuthRepository>();
         service.AddScoped<IEventRepository, EventRepository>();
+        service.AddScoped<IEventResponseRepository, EventResponseRepository>();
+        service.AddScoped<IUserEventRepository, UserEventRepository>();
 
         service.AddScoped<IMapper<User, DataAccess.Entities.User>, UserMapper>();
         service.AddScoped<IMapper<Event, DataAccess.Entities.Event>, EventMapper>();
+        service.AddScoped<IMapper<EventResponse, DataAccess.Entities.EventResponse>, EventResponseMapper>();
 
         return service.BuildServiceProvider();
     }

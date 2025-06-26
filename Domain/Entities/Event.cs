@@ -9,4 +9,5 @@ public class Event
     public string Location { get; set; }
     public int? Code { get; set; }
     public Guid CreatedBy { get; set; }
+    public string? Visibility { get; set; }
 }

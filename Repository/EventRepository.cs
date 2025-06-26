@@ -3,6 +3,7 @@ using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Repository.Contracts;
 using Repository.Contracts.Mappers;
+using Services.Constants;
 
 namespace Repository;
 public class EventRepository : IEventRepository
@@ -84,5 +85,26 @@ public class EventRepository : IEventRepository
             .ToListAsync();
 
         return events.Select(eventMapper.GetDomain).ToList();
+    }
+
+    public async Task<IList<Event>> GetAllPublic()
+    {
+        var events = await dataContext.Events
+            .Where(x => string.Equals(x.Visibility, Keys.Public))
+            .ToListAsync();
+
+        return events.Select (eventMapper.GetDomain).ToList();
+    }
+
+    public async Task<Event> GetByCode(int eventCode)
+    {
+        var @event = await dataContext.Events.FirstOrDefaultAsync(x => x.Code == eventCode);
+
+        if (@event == null)
+        {
+            throw new InvalidOperationException("The event was not found!");
+        }
+
+        return eventMapper.GetDomain(@event);
     }
 }

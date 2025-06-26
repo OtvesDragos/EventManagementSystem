@@ -6,6 +6,12 @@ public class EventMapper : IMapper<Domain.Entities.Event, Event>
 {
     public Event GetDataAccess(Domain.Entities.Event @event)
     {
+        var validVisibilities = new HashSet<string> { "public", "private" };
+
+        if (@event.Visibility != null && !validVisibilities.Contains(@event.Visibility.ToLowerInvariant().Trim()))
+        {
+            throw new ArgumentException($"Invalid visibility: {@event.Visibility}");
+        }
         return new Event
         {
             Id = Guid.NewGuid(),
@@ -14,6 +20,7 @@ public class EventMapper : IMapper<Domain.Entities.Event, Event>
             Timestamp = @event.Timestamp,
             Location = @event.Location,
             CreatedBy = @event.CreatedBy,
+            Visibility = @event.Visibility,
         };
     }
 
@@ -28,6 +35,7 @@ public class EventMapper : IMapper<Domain.Entities.Event, Event>
             Location = @event.Location,
             CreatedBy = @event.CreatedBy,
             Code = @event.Code,
+            Visibility = @event.Visibility,
         };
     }
 }

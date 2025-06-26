@@ -21,4 +21,5 @@ public class User
     public string LastName { get; set; }
 
     public IList<Event> Events { get; set; }
+    public IList<UserEvent> UserEvents { get; set; }
 }
